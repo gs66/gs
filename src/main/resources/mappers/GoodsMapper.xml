@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC  
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+   
+<mapper namespace="com.fh.shop.api.list.mapper.goods.IGoodsMapper">
+
+
+<select id="goodsList"  resultType="com.fh.shop.api.list.po.goods.Goods">
+select t.* from (select g.id,g.goodsName,g.goodsPhoto,g.goodsPrice,g.goodsCount,g.brandId,g.categoryInfo from t_goods g order by id desc ) t
+</select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/mvc
+    	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+           
+	<!-- 扫描项目中com.fh.shop.controller包下所有的类，从而使类中的@Controller注解生效 -->
+    <context:component-scan base-package="com.fh.shop.api.*.api"/>
+
+    <mvc:annotation-driven/>
+   <bean id="securityApscet" class="com.fh.shop.api.util.securityApscet"></bean>
+    <aop:config>
+        <aop:aspect ref="securityApscet">
+            <aop:pointcut id="safeAop" expression="execution(* com.fh.shop.api.*.api..*.*(..))"/>
+            <aop:around method="security" pointcut-ref="safeAop"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>
